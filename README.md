@@ -1,120 +1,120 @@
 # EmprenArtesanales
 
-## Artisanal Production Management System
+## Sistema de Gestión de Producción Artesanal
 
-A comprehensive inventory and production management system designed specifically for small-scale artisanal producers. This application helps manage raw materials, track recipes, control production batches, and monitor finished product inventory with professional-grade features and an intuitive user interface.
+Un sistema integral de gestión de inventario y producción diseñado específicamente para productores artesanales de pequeña escala. Esta aplicación ayuda a gestionar materias primas, rastrear recetas, controlar lotes de producción y monitorear el inventario de productos terminados con características de nivel profesional y una interfaz de usuario intuitiva.
 
-## 🎯 Key Features
+## 🎯 Características Principales
 
-### Inventory Management
-- **Raw Materials Tracking**: Monitor input quantities with automatic low-stock alerts
-- **Finished Products Control**: Track completed product inventory levels
-- **Real-time Stock Updates**: Automatic inventory adjustments during production
-- **Stock Transaction History**: Complete audit trail of all inventory movements
+### Gestión de Inventario
+- **Seguimiento de Materias Primas**: Monitorea cantidades de insumos con alertas automáticas de stock bajo
+- **Control de Productos Terminados**: Rastrea niveles de inventario de productos completados
+- **Actualizaciones de Stock en Tiempo Real**: Ajustes automáticos de inventario durante la producción
+- **Historial de Transacciones de Stock**: Registro completo de auditoría de todos los movimientos de inventario
 
-### Recipe Management
-- **Detailed Recipe Creation**: Define ingredients, quantities, and production instructions
-- **Recipe Library**: Organize and manage all your production formulas
-- **Ingredient Cost Calculation**: Track material costs per recipe
-- **Production Yield Tracking**: Monitor expected vs actual output
+### Gestión de Recetas
+- **Creación Detallada de Recetas**: Define ingredientes, cantidades e instrucciones de producción
+- **Biblioteca de Recetas**: Organiza y gestiona todas tus fórmulas de producción
+- **Cálculo de Costos de Ingredientes**: Rastrea costos de materiales por receta
+- **Seguimiento de Rendimiento de Producción**: Monitorea producción esperada vs real
 
-### Batch Production
-- **Production Planning**: Schedule and organize production runs
-- **Batch Tracking**: Monitor production status from start to completion
-- **Quality Control**: Record batch notes and production observations
-- **Automatic Inventory Updates**: Real-time stock adjustments during production
+### Producción por Lotes
+- **Planificación de Producción**: Programa y organiza corridas de producción
+- **Seguimiento de Lotes**: Monitorea el estado de producción desde el inicio hasta la finalización
+- **Control de Calidad**: Registra notas de lotes y observaciones de producción
+- **Actualizaciones Automáticas de Inventario**: Ajustes de stock en tiempo real durante la producción
 
-### Analytics & Reporting
-- **Production Dashboard**: Visual overview of key metrics and recent activity
-- **Batch Reports**: Detailed production history with date filtering
-- **Input Consumption Analysis**: Track material usage patterns
-- **Stock Level Monitoring**: Visual charts of inventory trends
-- **Cost Analysis**: Production cost tracking and profitability insights
+### Análisis e Informes
+- **Panel de Producción**: Vista visual de métricas clave y actividad reciente
+- **Informes de Lotes**: Historial detallado de producción con filtrado por fechas
+- **Análisis de Consumo de Insumos**: Rastrea patrones de uso de materiales
+- **Monitoreo de Niveles de Stock**: Gráficos visuales de tendencias de inventario
+- **Análisis de Costos**: Seguimiento de costos de producción y análisis de rentabilidad
 
-## 🛠 Technology Stack
+## 🛠 Stack Tecnológico
 
-- **Frontend**: React 18 with TypeScript
-- **Styling**: Tailwind CSS with custom design system
-- **Database**: Supabase (PostgreSQL) with Row Level Security
-- **Authentication**: Supabase Auth with email/password
-- **Charts**: Recharts for data visualization
-- **Icons**: Lucide React for consistent iconography
-- **Build Tool**: Vite for fast development and optimized builds
+- **Frontend**: React 18 con TypeScript
+- **Estilos**: Tailwind CSS con sistema de diseño personalizado
+- **Base de Datos**: Supabase (PostgreSQL) con Seguridad a Nivel de Fila
+- **Autenticación**: Supabase Auth con email/contraseña
+- **Gráficos**: Recharts para visualización de datos
+- **Iconos**: Lucide React para iconografía consistente
+- **Herramienta de Construcción**: Vite para desarrollo rápido y construcciones optimizadas
 
-## 🏗 Database Architecture
+## 🏗 Arquitectura de Base de Datos
 
-The system uses a relational database with the following core tables:
+El sistema utiliza una base de datos relacional con las siguientes tablas principales:
 
-- **Products**: Finished goods catalog
-- **Inputs**: Raw materials and ingredients inventory
-- **Recipes**: Production formulas with ingredient lists
-- **Recipe Ingredients**: Junction table linking recipes to inputs
-- **Batches**: Production run records
-- **Batch Transactions**: Detailed production tracking
-- **Stock Transactions**: Complete inventory movement history
+- **Products**: Catálogo de productos terminados
+- **Inputs**: Inventario de materias primas e ingredientes
+- **Recipes**: Fórmulas de producción con listas de ingredientes
+- **Recipe Ingredients**: Tabla de unión que vincula recetas con insumos
+- **Batches**: Registros de corridas de producción
+- **Batch Transactions**: Seguimiento detallado de producción
+- **Stock Transactions**: Historial completo de movimientos de inventario
 
-## 🚀 Getting Started
+## 🚀 Comenzando
 
-1. **Clone and Install**
+1. **Clonar e Instalar**
    ```bash
    npm install
    ```
 
-2. **Database Setup**
-   - Click "Connect to Supabase" in the application
-   - Configure your Supabase project
-   - Database schema will be automatically created
+2. **Configuración de Base de Datos**
+   - Haz clic en "Conectar a Supabase" en la aplicación
+   - Configura tu proyecto de Supabase
+   - El esquema de base de datos se creará automáticamente
 
-3. **Environment Configuration**
-   - Copy `.env.example` to `.env`
-   - Add your Supabase credentials
+3. **Configuración de Entorno**
+   - Copia `.env.example` a `.env`
+   - Agrega tus credenciales de Supabase
 
-4. **Start Development**
+4. **Iniciar Desarrollo**
    ```bash
    npm run dev
    ```
 
-## 📱 User Interface
+## 📱 Interfaz de Usuario
 
-The application features a clean, professional design with:
-- **Large Visual Icons**: Easy navigation with clear visual cues
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
-- **Intuitive Workflow**: Logical progression from inputs → recipes → production → reports
-- **Real-time Updates**: Live inventory and production status
-- **Professional Aesthetics**: Clean, modern interface suitable for business use
+La aplicación presenta un diseño limpio y profesional con:
+- **Iconos Visuales Grandes**: Navegación fácil con señales visuales claras
+- **Diseño Responsivo**: Funciona perfectamente en escritorio, tablet y móvil
+- **Flujo de Trabajo Intuitivo**: Progresión lógica desde insumos → recetas → producción → informes
+- **Actualizaciones en Tiempo Real**: Estado de inventario y producción en vivo
+- **Estética Profesional**: Interfaz limpia y moderna adecuada para uso empresarial
 
-## 🎯 Target Users
+## 🎯 Usuarios Objetivo
 
-Perfect for small-scale artisanal producers including:
-- Craft food producers
-- Artisanal beverage makers
-- Handmade cosmetics creators
-- Small-batch manufacturers
-- Specialty product makers
+Perfecto para productores artesanales de pequeña escala incluyendo:
+- Productores de alimentos artesanales
+- Fabricantes de bebidas artesanales
+- Creadores de cosméticos hechos a mano
+- Manufactureros de lotes pequeños
+- Fabricantes de productos especializados
 
-## 📊 Business Benefits
+## 📊 Beneficios Empresariales
 
-- **Inventory Control**: Never run out of materials or overstock
-- **Cost Management**: Track production costs and profitability
-- **Quality Consistency**: Standardized recipes ensure consistent output
-- **Production Planning**: Optimize batch sizes and scheduling
-- **Compliance Ready**: Complete audit trail for regulatory requirements
+- **Control de Inventario**: Nunca te quedes sin materiales ni tengas exceso de stock
+- **Gestión de Costos**: Rastrea costos de producción y rentabilidad
+- **Consistencia de Calidad**: Recetas estandarizadas aseguran producción consistente
+- **Planificación de Producción**: Optimiza tamaños de lotes y programación
+- **Listo para Cumplimiento**: Registro completo de auditoría para requisitos regulatorios
 
-## 🔒 Security Features
+## 🔒 Características de Seguridad
 
-- **User Authentication**: Secure login system
-- **Row Level Security**: Data isolation between users
-- **Audit Trail**: Complete transaction history
-- **Data Backup**: Automatic Supabase backups
+- **Autenticación de Usuario**: Sistema de inicio de sesión seguro
+- **Seguridad a Nivel de Fila**: Aislamiento de datos entre usuarios
+- **Registro de Auditoría**: Historial completo de transacciones
+- **Respaldo de Datos**: Respaldos automáticos de Supabase
 
 ---
 
-## 👨‍💼 Developer Information
+## 👨‍💼 Información del Desarrollador
 
-**Professional**: César Eduardo González  
+**Profesional**: César Eduardo González  
 **Email**: gonzalezeduardo_31@hotmail.com  
-**Cell**: +54 93884 858-907
+**Celular**: +54 93884 858-907
 
 ---
 
-*Built with modern web technologies for reliable, scalable artisanal production management.*
+*Construido con tecnologías web modernas para una gestión confiable y escalable de producción artesanal.*
