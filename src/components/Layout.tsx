@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { BarChart3, Package, ChefHat, Factory, Menu, X, ShoppingCart, LogOut } from 'lucide-react';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 interface LayoutProps {
   children: React.ReactNode;
