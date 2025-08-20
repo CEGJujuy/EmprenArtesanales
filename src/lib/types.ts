@@ -1,6 +1,19 @@
 export interface Input {
   id: string;
   name: string;
+  description?: string;
+  unit: string;
+  stock: number;
+  min_stock: number;
+  cost_per_unit: number;
+  supplier?: string;
+  created_at: string;
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  description?: string;
   unit: string;
   stock: number;
   min_stock: number;
@@ -8,21 +21,15 @@ export interface Input {
   created_at: string;
 }
 
-export interface Product {
-  id: string;
-  name: string;
-  unit: string;
-  stock: number;
-  price: number;
-  created_at: string;
-}
-
 export interface Recipe {
   id: string;
   name: string;
+  description?: string;
   product_id: string;
   yield_quantity: number;
-  instructions: string;
+  yield_unit: string;
+  instructions?: string;
+  preparation_time?: number;
   created_at: string;
   ingredients: RecipeIngredient[];
 }
@@ -35,20 +42,24 @@ export interface RecipeIngredient {
 export interface Batch {
   id: string;
   recipe_id: string;
+  batch_number: string;
   quantity: number;
-  status: 'planned' | 'in_progress' | 'completed';
+  status: 'planned' | 'in_progress' | 'completed' | 'cancelled';
+  start_date?: string;
+  completion_date?: string;
   notes?: string;
   created_at: string;
-  completed_at?: string;
 }
 
 export interface StockTransaction {
   id: string;
-  type: 'input_adjustment' | 'production_consumption' | 'production_output';
+  type: 'input_purchase' | 'input_consumption' | 'product_production' | 'product_sale' | 'adjustment';
+  reference_id?: string;
   input_id?: string;
   product_id?: string;
-  batch_id?: string;
   quantity: number;
+  unit_cost?: number;
+  total_cost?: number;
   notes?: string;
   created_at: string;
 }

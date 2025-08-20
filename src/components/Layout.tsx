@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
-import { BarChart3, Package, ChefHat, Factory, Menu, X } from 'lucide-react';
+import { BarChart3, Package, ChefHat, Factory, Menu, X, ShoppingCart, LogOut } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
   currentView: string;
   onViewChange: (view: string) => void;
+  onSignOut?: () => void;
 }
 
-export default function Layout({ children, currentView, onViewChange }: LayoutProps) {
+export default function Layout({ children, currentView, onViewChange, onSignOut }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navigation = [
-    { id: 'dashboard', name: 'Panel Principal', icon: BarChart3 },
-    { id: 'inputs', name: 'Insumos', icon: Package },
-    { id: 'recipes', name: 'Recetas', icon: ChefHat },
-    { id: 'production', name: 'Producción', icon: Factory },
-    { id: 'reports', name: 'Reportes', icon: BarChart3 }
+    { id: 'dashboard', name: 'Panel Principal', icon: BarChart3, color: 'text-indigo-600' },
+    { id: 'inputs', name: 'Insumos', icon: Package, color: 'text-blue-600' },
+    { id: 'products', name: 'Productos', icon: ShoppingCart, color: 'text-green-600' },
+    { id: 'recipes', name: 'Recetas', icon: ChefHat, color: 'text-purple-600' },
+    { id: 'production', name: 'Producción', icon: Factory, color: 'text-orange-600' },
+    { id: 'reports', name: 'Reportes', icon: BarChart3, color: 'text-indigo-600' }
   ];
 
   return (
@@ -29,14 +31,17 @@ export default function Layout({ children, currentView, onViewChange }: LayoutPr
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+      <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-          <h1 className="text-xl font-bold text-gray-900">EmprenArtesanales</h1>
+        <div className="flex items-center justify-between h-20 px-6 border-b border-gray-200 bg-gradient-to-r from-indigo-600 to-purple-600">
+          <div className="text-white">
+            <h1 className="text-xl font-bold">EmprenArtesanales</h1>
+            <p className="text-indigo-100 text-sm">Sistema de Gestión</p>
+          </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600"
+            className="lg:hidden p-2 rounded-md text-white hover:bg-white hover:bg-opacity-20 transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -51,37 +56,50 @@ export default function Layout({ children, currentView, onViewChange }: LayoutPr
                   onViewChange(item.id);
                   setSidebarOpen(false);
                 }}
-                className={`w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors ${
+                className={`w-full flex items-center px-4 py-4 text-left rounded-xl transition-all duration-200 ${
                   currentView === item.id
-                    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm'
+                    : 'text-gray-700 hover:bg-gray-100 hover:shadow-sm'
                 }`}
               >
-                <item.icon className={`h-6 w-6 mr-3 ${
-                  currentView === item.id ? 'text-indigo-600' : 'text-gray-400'
-                }`} />
-                <span className="font-medium">{item.name}</span>
+                <div className={`p-2 rounded-lg mr-4 ${
+                  currentView === item.id ? 'bg-indigo-100' : 'bg-gray-100'
+                }`}>
+                  <item.icon className={`h-6 w-6 ${
+                    currentView === item.id ? item.color : 'text-gray-500'
+                  }`} />
+                </div>
+                <span className="font-medium text-base">{item.name}</span>
               </button>
             ))}
           </div>
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
-          <div className="text-center">
-            <p className="text-xs text-gray-500">Sistema de Gestión</p>
-            <p className="text-xs text-gray-500">Producción Artesanal</p>
+        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200">
+          {onSignOut && (
+            <button
+              onClick={onSignOut}
+              className="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <LogOut className="h-5 w-5 mr-3 text-gray-500" />
+              <span className="font-medium">Cerrar Sesión</span>
+            </button>
+          )}
+          <div className="text-center mt-4">
+            <p className="text-xs text-gray-500">César Eduardo González</p>
+            <p className="text-xs text-gray-400">gonzalezeduardo_31@hotmail.com</p>
           </div>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className="lg:pl-72">
         {/* Top bar */}
         <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600"
+              className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
             >
               <Menu className="h-6 w-6" />
             </button>

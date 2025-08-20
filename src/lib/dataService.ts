@@ -115,11 +115,13 @@ export function getBatches(): Batch[] {
   return getStorageData(STORAGE_KEYS.BATCHES, []);
 }
 
-export function addBatch(batch: Omit<Batch, 'id' | 'created_at'>): Batch {
+export function addBatch(batch: Omit<Batch, 'id' | 'created_at' | 'batch_number'>): Batch {
   const batches = getBatches();
+  const batchNumber = `LOTE-${Date.now()}`;
   const newBatch: Batch = {
     ...batch,
     id: uuidv4(),
+    batch_number: batchNumber,
     created_at: new Date().toISOString()
   };
   batches.push(newBatch);
@@ -172,11 +174,13 @@ export function completeBatch(batchId: string): { success: boolean; message: str
     
     transactions.push({
       id: uuidv4(),
-      type: 'production_consumption',
+      type: 'input_consumption',
+      reference_id: batchId,
       input_id: input.id,
-      batch_id: batchId,
       quantity: -consumedQuantity,
-      notes: `Consumo para lote ${batch.id}`,
+      unit_cost: input.cost_per_unit,
+      total_cost: input.cost_per_unit * consumedQuantity,
+      notes: `Consumo para lote ${batch.batch_number}`,
       created_at: new Date().toISOString()
     });
   }
@@ -189,11 +193,11 @@ export function completeBatch(batchId: string): { success: boolean; message: str
     
     transactions.push({
       id: uuidv4(),
-      type: 'production_output',
+      type: 'product_production',
+      reference_id: batchId,
       product_id: product.id,
-      batch_id: batchId,
       quantity: producedQuantity,
-      notes: `Producción de lote ${batch.id}`,
+      notes: `Producción de lote ${batch.batch_number}`,
       created_at: new Date().toISOString()
     });
   }
@@ -205,7 +209,7 @@ export function completeBatch(batchId: string): { success: boolean; message: str
   // Update batch status
   updateBatch(batchId, { 
     status: 'completed', 
-    completed_at: new Date().toISOString() 
+    completion_date: new Date().toISOString() 
   });
   
   return { success: true, message: 'Lote completado exitosamente' };
@@ -235,7 +239,7 @@ export function getDashboardStats(): DashboardStats {
   const recipes = getRecipes();
   const batches = getBatches();
   
-  const activeBatches = batches.filter(b => b.status !== 'completed').length;
+  const activeBatches = batches.filter(b => b.status !== 'completed' && b.status !== 'cancelled').length;
   const lowStockInputs = inputs.filter(i => i.stock <= i.min_stock).length;
   const recentBatches = batches
     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
@@ -258,4 +262,35 @@ export function calculateRecipeCost(recipe: Recipe): number {
     const input = inputs.find(i => i.id === ingredient.input_id);
     return total + (input ? input.cost_per_unit * ingredient.quantity : 0);
   }, 0);
+}
+
+// Utility functions for stock management
+export function adjustInputStock(inputId: string, quantity: number, notes?: string): boolean {
+  const input = updateInput(inputId, { stock: Math.max(0, getInputs().find(i => i.id === inputId)?.stock || 0) + quantity });
+  if (!input) return false;
+
+  addStockTransaction({
+    type: quantity > 0 ? 'input_purchase' : 'adjustment',
+    input_id: inputId,
+    quantity,
+    unit_cost: input.cost_per_unit,
+    total_cost: Math.abs(quantity) * input.cost_per_unit,
+    notes: notes || (quantity > 0 ? 'Compra de insumo' : 'Ajuste de stock')
+  });
+
+  return true;
+}
+
+export function adjustProductStock(productId: string, quantity: number, notes?: string): boolean {
+  const product = updateProduct(productId, { stock: Math.max(0, getProducts().find(p => p.id === productId)?.stock || 0) + quantity });
+  if (!product) return false;
+
+  addStockTransaction({
+    type: quantity > 0 ? 'adjustment' : 'product_sale',
+    product_id: productId,
+    quantity,
+    notes: notes || (quantity > 0 ? 'Ajuste de stock' : 'Venta de producto')
+  });
+
+  return true;
 }

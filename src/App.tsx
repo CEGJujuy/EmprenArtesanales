@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import InputsManager from './components/InputsManager';
+import ProductsManager from './components/ProductsManager';
 import RecipesManager from './components/RecipesManager';
 import ProductionManager from './components/ProductionManager';
 import ReportsManager from './components/ReportsManager';
@@ -21,6 +22,8 @@ function App() {
         return <Dashboard />;
       case 'inputs':
         return <InputsManager />;
+      case 'products':
+        return <ProductsManager />;
       case 'recipes':
         return <RecipesManager />;
       case 'production':
