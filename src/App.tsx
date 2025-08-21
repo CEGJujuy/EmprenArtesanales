@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import LandingPage from './components/LandingPage';
 import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import InputsManager from './components/InputsManager';
@@ -10,11 +11,16 @@ import { initializeSampleData } from './lib/localStorage';
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard');
+  const [showLanding, setShowLanding] = useState(true);
 
   useEffect(() => {
     // Initialize sample data on first load
     initializeSampleData();
   }, []);
+
+  const handleGetStarted = () => {
+    setShowLanding(false);
+  };
 
   const renderCurrentView = () => {
     switch (currentView) {
@@ -34,6 +40,10 @@ function App() {
         return <Dashboard />;
     }
   };
+
+  if (showLanding) {
+    return <LandingPage onGetStarted={handleGetStarted} />;
+  }
 
   return (
     <Layout currentView={currentView} onViewChange={setCurrentView}>

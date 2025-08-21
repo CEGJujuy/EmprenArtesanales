@@ -17,6 +17,10 @@
     line-height: 1.2;
     font-weight: 600;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
@@ -66,5 +70,37 @@
   
   .metric-icon {
     @apply w-12 h-12 rounded-lg flex items-center justify-center;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+  }
+  
+  .hero-card {
+    @apply bg-white rounded-2xl shadow-2xl p-8 transform transition-transform duration-300;
+  }
+  
+  .hero-card:hover {
+    @apply rotate-0;
+  }
+  
+  .feature-card {
+    @apply bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2;
+  }
+  
+  .testimonial-card {
+    @apply bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300;
+  }
+  
+  .stat-card {
+    @apply text-center;
+  }
+  
+  .benefit-item {
+    @apply flex items-center;
+  }
+  
+  .contact-item {
+    @apply flex items-center;
   }
 }
