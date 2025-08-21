@@ -9,7 +9,7 @@
   
   body {
     @apply bg-gray-50 text-gray-900 font-sans;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: "rlig\" 1, "calt\" 1;
     line-height: 1.5;
   }
   
@@ -30,9 +30,8 @@
   
   @keyframes glow {
     0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-            backgroundRepeat: 'repeat'
-          }}></div>
-        </div>
+    50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.5); }
+  }
 }
 
 @layer components {
