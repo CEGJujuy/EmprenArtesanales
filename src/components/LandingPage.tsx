@@ -12,7 +12,7 @@
   body {
     @apply bg-gray-50 text-gray-900;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    font-feature-settings: "rlig\" 1, "calt\" 1;
+    font-feature-settings: "rlig" 1, "calt" 1;
     line-height: 1.5;
   }
   
@@ -33,7 +33,6 @@
   
   @keyframes glow {
     0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-  }
   
   /* Custom animations */
   @keyframes float {
@@ -43,37 +42,60 @@
   
   @keyframes glow {
     0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
   }
   
-  .gradient-text {
-    @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
-  .hero-card {
-    @apply bg-white rounded-2xl shadow-2xl p-8 transform transition-transform duration-300;
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
   
-  .hero-card:hover {
-    @apply rotate-0;
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
   }
   
-  .feature-card {
-    @apply bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2;
-  }
-  
-  .testimonial-card {
-    @apply bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300;
-  }
-  
-  .stat-card {
-    @apply text-center;
-  }
-  
-  .benefit-item {
-    @apply flex items-center;
-  }
-  
-  .contact-item {
-    @apply flex items-center;
+  .font-inter {
+    font-family: 'Inter', sans-serif;
   }
 }
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-sm hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500;
+  }
+  
+  .btn-success {
+    @apply btn bg-success-600 text-white hover:bg-success-700 focus:ring-success-500;
+  }
+  
+  .btn-warning {
+    @apply btn bg-warning-600 text-white hover:bg-warning-700 focus:ring-warning-500;
+  }
+  
+  .btn-error {
+    @apply btn bg-error-600 text-white hover:bg-error-700 focus:ring-error-500;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200;
+  }
+  
+  .input {
